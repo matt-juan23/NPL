@@ -103,7 +103,8 @@ class loss(tnn.Module):
         loss1 = ratingLoss(ratingOutput.squeeze(1), ratingTarget.float())
         loss2 = catLoss(categoryOutput, categoryTarget)
         #print(loss1, loss2)
-        return loss1 + loss2
+        # return (loss1 + loss2)/2
+        return (loss1 + loss2)/2
 
 '''
 # REVISION 1
