@@ -24,6 +24,7 @@ import torch.nn as tnn
 import torch.optim as toptim
 from torchtext.vocab import GloVe
 import numpy as np
+import math
 # import sklearn
 
 from config import device
@@ -103,8 +104,9 @@ class loss(tnn.Module):
         loss1 = ratingLoss(ratingOutput.squeeze(1), ratingTarget.float())
         loss2 = catLoss(categoryOutput, categoryTarget)
         #print(loss1, loss2)
+        # return (loss1 + loss2) best
         # return (loss1 + loss2)/2
-        return (loss1 + loss2)/2
+        return math.log(loss1, loss2)
 
 '''
 # REVISION 1
@@ -265,7 +267,7 @@ lossFunc = loss()
 
 trainValSplit = 0.9
 batchSize = 64
-epochs = 10
+epochs = 20
 #optimiser = toptim.SGD(net.parameters(), lr=0.01)
 #optimiser = toptim.Adam(net.parameters(), lr=0.0005)
 optimiser = toptim.Adam(net.parameters(), lr=0.001)
