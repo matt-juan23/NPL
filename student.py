@@ -222,16 +222,33 @@ class network(tnn.Module):
         #return tnn.sigmoid(self.fc1(hidden1)), tnn.softmax(self.fc2(hidden2))
         #return self.fc1(torch.sigmoid(hidden1)), self.fc2(torch.sigmoid(hidden2))
         return self.fc1(hidden1), self.fc2(hidden2)
-
         #return self.fc1(torch.cat((hidden1[-2,:,:], hidden1[-1,:,:]), dim=1)), self.fc2(torch.cat((hidden2[-2,:,:], hidden2[-1,:,:]), dim=1))
 
 
 '''
 class convNet(cnn.Module):
-    pass
+    
     def __init__(self):
+        self.
         super(convNet, self).__init__()
 
+        self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx = pad_idx)
+        
+        self.conv_0 = nn.Conv2d(in_channels = 1, 
+                                out_channels = n_filters, 
+                                kernel_size = (filter_sizes[0], embedding_dim))
+        
+        self.conv_1 = nn.Conv2d(in_channels = 1, 
+                                out_channels = n_filters, 
+                                kernel_size = (filter_sizes[1], embedding_dim))
+        
+        self.conv_2 = nn.Conv2d(in_channels = 1, 
+                                out_channels = n_filters, 
+                                kernel_size = (filter_sizes[2], embedding_dim))
+        
+        self.fc = nn.Linear(len(filter_sizes) * n_filters, output_dim)
+        
+        self.dropout = nn.Dropout(dropout)
     def forward(self):
         pass
 
