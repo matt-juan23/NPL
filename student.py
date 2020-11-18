@@ -219,6 +219,7 @@ class network(tnn.Module):
         #return self.fc1(torch.cat((hidden1[-2,:,:], hidden1[-1,:,:]), dim=1)), self.fc2(torch.cat((hidden2[-2,:,:], hidden2[-1,:,:]), dim=1))
 
 
+'''
 class convNet(cnn.Module):
     pass
     def __init__(self):
@@ -227,8 +228,7 @@ class convNet(cnn.Module):
     def forward(self):
         pass
 
-
-
+'''
 '''
 # pretty shit ngl
 class network(tnn.Module):
