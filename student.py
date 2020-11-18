@@ -186,17 +186,17 @@ class network(tnn.Module):
                             128,
                             num_layers=2,
                             bidirectional=True,
-                            dropout=0.3)
+                            dropout=0.6)
         self.fc1 = tnn.Linear(128*2, 1)
-        self.dropout1 = tnn.Dropout(0.3)
+        self.dropout1 = tnn.Dropout(0.6)
 
         self.rnn2 = tnn.LSTM(300,
                             128,
                             num_layers=2,
                             bidirectional=True,
-                            dropout=0.3)
+                            dropout=0.6)
         self.fc2 = tnn.Linear(128*2, 5)
-        self.dropout2 = tnn.Dropout(0.3)
+        self.dropout2 = tnn.Dropout(0.6)
 
     def forward(self, input, length):
         input = input.float() # shape [batch size, sentence length, embedding size]
