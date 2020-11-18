@@ -253,7 +253,7 @@ lossFunc = loss()
 
 trainValSplit = 0.8
 batchSize = 64
-epochs = 1
+epochs = 10
 #optimiser = toptim.SGD(net.parameters(), lr=0.01)
 #optimiser = toptim.Adam(net.parameters(), lr=0.0005)
 optimiser = toptim.Adam(net.parameters(), lr=0.005)
