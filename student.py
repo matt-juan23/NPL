@@ -106,7 +106,7 @@ class loss(tnn.Module):
         #print(loss1, loss2)
         # return (loss1 + loss2) best
         # return (loss1 + loss2)/2
-        return math.log(loss1, loss2)
+        return torch.log(loss1 + loss2)
 
 '''
 # REVISION 1
