@@ -101,11 +101,10 @@ class loss(tnn.Module):
         #ratingOutput, categoryOutput, ratingTarget, categoryTarget = ratingOutput.float(), categoryOutput.float(), ratingTarget.float(), categoryTarget.float()
 
         ratingLoss = tnn.BCEWithLogitsLoss()
-        #ratingLoss = tnn.NLLLoss()
         catLoss = tnn.CrossEntropyLoss()
         loss1 = ratingLoss(ratingOutput.squeeze(1), ratingTarget.float())
         loss2 = catLoss(categoryOutput, categoryTarget)
-        #print(loss1, loss2)
+        # print(loss1, loss2)
         # return (loss1 + loss2) 
         # return (loss1 + loss2)/2
         return torch.log(loss1 + loss2)
@@ -184,12 +183,18 @@ class network(tnn.Module):
         #return self.fc1(torch.cat((hidden1[-2,:,:], hidden1[-1,:,:]), dim=1)), self.fc2(torch.cat((hidden2[-2,:,:], hidden2[-1,:,:]), dim=1))
 '''
 #pretty cool
+
+''' Justification
+
+
+'''
+
 class network(tnn.Module):
     def __init__(self):
         super(network, self).__init__()
         self.rnn1 = tnn.LSTM(300,
                             256,
-                            num_layers=3,
+                            num_layers=2,
                             bidirectional=True,
                             dropout=0.6)
         self.fc1 = tnn.Linear(256*2, 1)
@@ -197,7 +202,7 @@ class network(tnn.Module):
 
         self.rnn2 = tnn.LSTM(300,
                             256,
-                            num_layers=3,
+                            num_layers=2,
                             bidirectional=True,
                             dropout=0.6)
         self.fc2 = tnn.Linear(256*2, 5)
