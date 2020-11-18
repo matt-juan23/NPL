@@ -184,18 +184,18 @@ class network(tnn.Module):
         super(network, self).__init__()
         self.rnn1 = tnn.LSTM(300,
                             128,
-                            num_layers=2,
+                            num_layers=3,
                             bidirectional=True,
                             dropout=0.6)
-        self.fc1 = tnn.Linear(128*2, 1)
+        self.fc1 = tnn.Linear(128*3, 1)
         self.dropout1 = tnn.Dropout(0.6)
 
         self.rnn2 = tnn.LSTM(300,
                             128,
-                            num_layers=2,
+                            num_layers=3,
                             bidirectional=True,
                             dropout=0.6)
-        self.fc2 = tnn.Linear(128*2, 5)
+        self.fc2 = tnn.Linear(128*3, 5)
         self.dropout2 = tnn.Dropout(0.6)
 
     def forward(self, input, length):
@@ -219,8 +219,13 @@ class network(tnn.Module):
         #return self.fc1(torch.cat((hidden1[-2,:,:], hidden1[-1,:,:]), dim=1)), self.fc2(torch.cat((hidden2[-2,:,:], hidden2[-1,:,:]), dim=1))
 
 
+class convNet(cnn.Module):
+    pass
+    def __init__(self):
+        super(convNet, self).__init__()
 
-
+    def forward(self):
+        pass
 
 
 
