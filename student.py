@@ -104,7 +104,7 @@ class loss(tnn.Module):
         print(ratingOutput.shape)
         print(categoryOutput.shape)
 
-        ratingLoss = tnn.NLLLoss()
+        ratingLoss = tnn.MSELoss()
         catLoss = tnn.CrossEntropyLoss()
         loss1 = ratingLoss(ratingOutput.squeeze(1), ratingTarget.float())
         loss2 = catLoss(categoryOutput, categoryTarget)
