@@ -13,6 +13,7 @@ from torchtext import data
 from config import device
 import student
 
+
 def main():
     print("Using device: {}"
           "\n".format(str(device)))
@@ -53,6 +54,7 @@ def main():
     optimiser = student.optimiser
 
     # Train.
+    loss_arr = []
     for epoch in range(student.epochs):
         runningLoss = 0
 
@@ -79,7 +81,7 @@ def main():
             optimiser.step()
 
             runningLoss += loss.item()
-
+            loss_arr.append(runningLoss)
             if i % 32 == 31:
                 print("Epoch: %2d, Batch: %4d, Loss: %.3f"
                       % (epoch + 1, i + 1, runningLoss / 32))
@@ -141,6 +143,7 @@ def main():
                                               correctRatingOnlyPercent,
                                               correctCategoryOnlyPercent,
                                               bothCorrectPercent, score))
+
 
 if __name__ == '__main__':
     main()
