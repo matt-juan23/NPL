@@ -220,7 +220,7 @@ class network(tnn.Module):
         #print(hidden1.shape, hidden2.shape)
 
         #return tnn.sigmoid(self.fc1(hidden1)), tnn.softmax(self.fc2(hidden2))
-        return self.fc1(tnn.functional.sigmoid(hidden1)), self.fc2(tnn.functional.sigmoid(hidden2))
+        return self.fc1(torch.sigmoid(hidden1)), self.fc2(torch.sigmoid(hidden2))
         #return self.fc1(torch.cat((hidden1[-2,:,:], hidden1[-1,:,:]), dim=1)), self.fc2(torch.cat((hidden2[-2,:,:], hidden2[-1,:,:]), dim=1))
 
 
@@ -269,7 +269,7 @@ lossFunc = loss()
 
 trainValSplit = 0.8
 batchSize = 64
-epochs = 20
+epochs = 25
 #optimiser = toptim.SGD(net.parameters(), lr=0.01)
 #optimiser = toptim.Adam(net.parameters(), lr=0.0005)
 optimiser = toptim.Adam(net.parameters(), lr=0.001)
