@@ -218,6 +218,12 @@ class network(tnn.Module):
         return self.fc1(hidden1), self.fc2(hidden2)
         #return self.fc1(torch.cat((hidden1[-2,:,:], hidden1[-1,:,:]), dim=1)), self.fc2(torch.cat((hidden2[-2,:,:], hidden2[-1,:,:]), dim=1))
 
+
+
+
+
+
+
 '''
 # pretty shit ngl
 class network(tnn.Module):
@@ -252,7 +258,7 @@ lossFunc = loss()
 ################################################################################
 
 trainValSplit = 0.9
-batchSize = 64
+batchSize = 32
 epochs = 10
 #optimiser = toptim.SGD(net.parameters(), lr=0.01)
 #optimiser = toptim.Adam(net.parameters(), lr=0.0005)
