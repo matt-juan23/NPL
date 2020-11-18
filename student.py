@@ -269,10 +269,10 @@ lossFunc = loss()
 
 trainValSplit = 0.8
 batchSize = 64
-epochs = 25
+epochs = 20
 #optimiser = toptim.SGD(net.parameters(), lr=0.01)
 #optimiser = toptim.Adam(net.parameters(), lr=0.0005)
-optimiser = toptim.Adam(net.parameters(), lr=0.001)
+optimiser = toptim.Adam(net.parameters(), lr=0.005)
 
 # 79.26 lr=0.005 dropout=0.5 arch=lstm->linear
 # 83.91 lr=0.0005 dropout=0.5 same arch + preprocessing 20 epochs
