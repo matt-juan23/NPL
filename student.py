@@ -189,17 +189,17 @@ class network(tnn.Module):
                             128,
                             num_layers=3,
                             bidirectional=True,
-                            dropout=0.7)
+                            dropout=0.5)
         self.fc1 = tnn.Linear(128*2, 1)
-        self.dropout1 = tnn.Dropout(0.7)
+        self.dropout1 = tnn.Dropout(0.5)
 
         self.rnn2 = tnn.LSTM(300,
                             128,
                             num_layers=3,
                             bidirectional=True,
-                            dropout=0.7)
+                            dropout=0.5)
         self.fc2 = tnn.Linear(128*2, 5)
-        self.dropout2 = tnn.Dropout(0.7)
+        self.dropout2 = tnn.Dropout(0.5)
 
     def forward(self, input, length):
         input = input.float() # shape [batch size, sentence length, embedding size]
@@ -277,3 +277,11 @@ optimiser = toptim.Adam(net.parameters(), lr=0.001)
 # 40 epochs went about 0.5 better score
 
 # TrainSplit: 0.9,300d, 10 epoches, adam 0.001 lr --> 86.9
+
+
+
+# layers
+# Adam lr
+# loss func
+# trainValSplit
+# epochs
