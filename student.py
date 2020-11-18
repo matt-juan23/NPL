@@ -100,6 +100,10 @@ class loss(tnn.Module):
     def forward(self, ratingOutput, categoryOutput, ratingTarget, categoryTarget):
         #ratingOutput, categoryOutput, ratingTarget, categoryTarget = ratingOutput.float(), categoryOutput.float(), ratingTarget.float(), categoryTarget.float()
         # ratingLoss = tnn.BCEWithLogitsLoss()
+
+        print(ratingOutput.shape())
+        print(categoryOutput.shape())
+
         ratingLoss = tnn.NLLLoss()
         catLoss = tnn.CrossEntropyLoss()
         loss1 = ratingLoss(ratingOutput.squeeze(1), ratingTarget.float())
