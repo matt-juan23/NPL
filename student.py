@@ -99,12 +99,9 @@ class loss(tnn.Module):
 
     def forward(self, ratingOutput, categoryOutput, ratingTarget, categoryTarget):
         #ratingOutput, categoryOutput, ratingTarget, categoryTarget = ratingOutput.float(), categoryOutput.float(), ratingTarget.float(), categoryTarget.float()
-        # ratingLoss = tnn.BCEWithLogitsLoss()
 
-        #print(ratingOutput.shape)
-        #print(categoryOutput.shape)
-
-        ratingLoss = tnn.MSELoss()
+        ratingLoss = tnn.BCEWithLogitsLoss()
+        #ratingLoss = tnn.NLLLoss()
         catLoss = tnn.CrossEntropyLoss()
         loss1 = ratingLoss(ratingOutput.squeeze(1), ratingTarget.float())
         loss2 = catLoss(categoryOutput, categoryTarget)
@@ -272,7 +269,7 @@ lossFunc = loss()
 
 trainValSplit = 0.9
 batchSize = 64
-epochs = 10
+epochs = 20
 #optimiser = toptim.SGD(net.parameters(), lr=0.01)
 #optimiser = toptim.Adam(net.parameters(), lr=0.0005)
 optimiser = toptim.Adam(net.parameters(), lr=0.001)
