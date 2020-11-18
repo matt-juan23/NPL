@@ -99,12 +99,13 @@ class loss(tnn.Module):
 
     def forward(self, ratingOutput, categoryOutput, ratingTarget, categoryTarget):
         #ratingOutput, categoryOutput, ratingTarget, categoryTarget = ratingOutput.float(), categoryOutput.float(), ratingTarget.float(), categoryTarget.float()
-        ratingLoss = tnn.BCEWithLogitsLoss()
+        # ratingLoss = tnn.BCEWithLogitsLoss()
+        ratingLoss.tnn.NLLLoss()
         catLoss = tnn.CrossEntropyLoss()
         loss1 = ratingLoss(ratingOutput.squeeze(1), ratingTarget.float())
         loss2 = catLoss(categoryOutput, categoryTarget)
         #print(loss1, loss2)
-        # return (loss1 + loss2) best
+        # return (loss1 + loss2) 
         # return (loss1 + loss2)/2
         return torch.log(loss1 + loss2)
 
@@ -189,17 +190,17 @@ class network(tnn.Module):
                             128,
                             num_layers=3,
                             bidirectional=True,
-                            dropout=0.5)
+                            dropout=0.6)
         self.fc1 = tnn.Linear(128*2, 1)
-        self.dropout1 = tnn.Dropout(0.5)
+        self.dropout1 = tnn.Dropout(0.6)
 
         self.rnn2 = tnn.LSTM(300,
                             128,
                             num_layers=3,
                             bidirectional=True,
-                            dropout=0.5)
+                            dropout=0.6)
         self.fc2 = tnn.Linear(128*2, 5)
-        self.dropout2 = tnn.Dropout(0.5)
+        self.dropout2 = tnn.Dropout(0.6)
 
     def forward(self, input, length):
         input = input.float() # shape [batch size, sentence length, embedding size]
