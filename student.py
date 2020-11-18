@@ -187,7 +187,7 @@ class network(tnn.Module):
                             num_layers=3,
                             bidirectional=True,
                             dropout=0.6)
-        self.fc1 = tnn.Linear(128*3, 1)
+        self.fc1 = tnn.Linear(128*2, 1)
         self.dropout1 = tnn.Dropout(0.6)
 
         self.rnn2 = tnn.LSTM(300,
@@ -195,7 +195,7 @@ class network(tnn.Module):
                             num_layers=3,
                             bidirectional=True,
                             dropout=0.6)
-        self.fc2 = tnn.Linear(128*3, 5)
+        self.fc2 = tnn.Linear(128*2, 5)
         self.dropout2 = tnn.Dropout(0.6)
 
     def forward(self, input, length):
