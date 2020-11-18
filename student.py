@@ -101,8 +101,8 @@ class loss(tnn.Module):
         #ratingOutput, categoryOutput, ratingTarget, categoryTarget = ratingOutput.float(), categoryOutput.float(), ratingTarget.float(), categoryTarget.float()
         # ratingLoss = tnn.BCEWithLogitsLoss()
 
-        print(ratingOutput.shape)
-        print(categoryOutput.shape)
+        #print(ratingOutput.shape)
+        #print(categoryOutput.shape)
 
         ratingLoss = tnn.MSELoss()
         catLoss = tnn.CrossEntropyLoss()
