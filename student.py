@@ -219,8 +219,8 @@ class network(tnn.Module):
         hidden2 = self.dropout2(torch.cat((hidden2[-1,:,:], hidden2[-2,:,:]), dim=1))
         #print(hidden1.shape, hidden2.shape)
 
-        #return sigmoid(self.fc1(hidden1)), softmax(self.fc2(hidden2))
-        return self.fc1(tnn.sigmoid(hidden1)), self.fc2(tnn.sigmoid(hidden2))
+        #return tnn.sigmoid(self.fc1(hidden1)), tnn.softmax(self.fc2(hidden2))
+        return self.fc1(tnn.functional.sigmoid(hidden1)), self.fc2(tnn.functional.tnn.sigmoid(hidden2))
         #return self.fc1(torch.cat((hidden1[-2,:,:], hidden1[-1,:,:]), dim=1)), self.fc2(torch.cat((hidden2[-2,:,:], hidden2[-1,:,:]), dim=1))
 
 
