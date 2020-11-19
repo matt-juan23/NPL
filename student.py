@@ -106,7 +106,7 @@ class loss(tnn.Module):
         # print(loss1, loss2)
         # return (loss1 + loss2) 
         # return (loss1 + loss2)/2
-        return torch.log(loss1) + torch.log(loss2)
+        return torch.log(loss1)/2 + torch.log(loss2)/2
 
 '''
 # REVISION 1
@@ -206,7 +206,7 @@ class network(tnn.Module):
 
         self.rnn2 = tnn.LSTM(300,
                             256,
-                            num_layers=2,
+                            num_layers=3,
                             bidirectional=True,
                             dropout=0.6)
 
@@ -235,7 +235,6 @@ class network(tnn.Module):
         # network 2
         output2, (hidden2, _) = self.rnn2(dropout2)
         hidden2 = self.dropout2(torch.cat((hidden2[-1,:,:], hidden2[-2,:,:]), dim=1))
-
         hidden2 = self.rnn2fc1(hidden2)
         hidden2 = torch.relu(hidden2)
 
