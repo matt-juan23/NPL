@@ -199,15 +199,23 @@ class network(tnn.Module):
                             num_layers=2,
                             bidirectional=True,
                             dropout=0.6)
-        self.fc1 = tnn.Linear(256*2, 1)
+
+        self.rnn1fc1 = tnn.Linear(256*2, 128)
+        self.rnn1fc2 = tnn.Linear(128, 1)
+
         self.dropout1 = tnn.Dropout(0.6)
+
+
+
 
         self.rnn2 = tnn.LSTM(300,
                             256,
                             num_layers=2,
                             bidirectional=True,
                             dropout=0.6)
-        self.fc2 = tnn.Linear(256*2, 5)
+
+        self.rnn2fc1 = tnn.Linear(256*2, 5)
+
         self.dropout2 = tnn.Dropout(0.6)
 
     def forward(self, input, length):
@@ -219,16 +227,21 @@ class network(tnn.Module):
         dropout1 = self.dropout1(input)
         dropout2 = self.dropout2(input)
 
-        output1, (hidden1, _) = self.rnn1(dropout1)
-        output2, (hidden2, _) = self.rnn2(dropout2)
+        
         #print(hidden1.shape)
+        # network 1
+        output1, (hidden1, _) = self.rnn1(dropout1)
         hidden1 = self.dropout1(torch.cat((hidden1[-1,:,:], hidden1[-2,:,:]), dim=1))
+        hidden1 = self.rnn1fc1(hidden1)
+
+        # network 2
+        output2, (hidden2, _) = self.rnn2(dropout2)
         hidden2 = self.dropout2(torch.cat((hidden2[-1,:,:], hidden2[-2,:,:]), dim=1))
         #print(hidden1.shape, hidden2.shape)
 
         #return tnn.sigmoid(self.fc1(hidden1)), tnn.softmax(self.fc2(hidden2))
         #return self.fc1(torch.sigmoid(hidden1)), self.fc2(torch.sigmoid(hidden2))
-        return self.fc1(hidden1), self.fc2(hidden2)
+        return self.rnn1fc2(hidden1), self.rnn2fc1(hidden2)
         #return self.fc1(torch.cat((hidden1[-2,:,:], hidden1[-1,:,:]), dim=1)), self.fc2(torch.cat((hidden2[-2,:,:], hidden2[-1,:,:]), dim=1))
 
 
