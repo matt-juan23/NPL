@@ -205,13 +205,13 @@ class network(tnn.Module):
 
 
         self.rnn2 = tnn.LSTM(300,
-                            256,
+                            512,
                             num_layers=2,
                             bidirectional=True,
                             dropout=0.6)
 
-        self.rnn2fc1 = tnn.Linear(256*2, 128)
-        self.rnn2fc2 = tnn.Linear(128, 5)
+        self.rnn2fc1 = tnn.Linear(512*2, 512)
+        self.rnn2fc2 = tnn.Linear(512, 5)
         self.dropout2 = tnn.Dropout(0.6)
 
     def forward(self, input, length):
@@ -308,7 +308,7 @@ lossFunc = loss()
 ################################################################################
 
 trainValSplit = 0.9
-batchSize = 64
+batchSize = 128
 epochs = 10
 #optimiser = toptim.SGD(net.parameters(), lr=0.01)
 #optimiser = toptim.Adam(net.parameters(), lr=0.0005)
