@@ -205,12 +205,12 @@ class network(tnn.Module):
 
 
         self.rnn2 = tnn.LSTM(300,
-                            512,
+                            256,
                             num_layers=2,
                             bidirectional=True,
                             dropout=0.6)
 
-        self.rnn2fc1 = tnn.Linear(512*2, 128)
+        self.rnn2fc1 = tnn.Linear(256*2, 128)
         self.rnn2fc2 = tnn.Linear(128, 1)
         self.dropout2 = tnn.Dropout(0.6)
 
