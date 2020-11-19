@@ -200,8 +200,8 @@ class network(tnn.Module):
                             dropout=0.6)
 
         self.rnn1fc1 = tnn.Linear(256*2, 128)
+        self.bn1 = nn.BatchNorm1d(num_features=128)
         self.rnn1fc2 = tnn.Linear(128, 1)
-
         self.dropout1 = tnn.Dropout(0.6)
 
 
@@ -212,7 +212,7 @@ class network(tnn.Module):
                             dropout=0.6)
 
         self.rnn2fc1 = tnn.Linear(256*2, 5)
-
+        # self.bn2 = nn.BatchNorm1d(num_features=5)
         self.dropout2 = tnn.Dropout(0.6)
 
     def forward(self, input, length):
@@ -229,12 +229,16 @@ class network(tnn.Module):
         # network 1
         output1, (hidden1, _) = self.rnn1(dropout1)
         hidden1 = self.dropout1(torch.cat((hidden1[-1,:,:], hidden1[-2,:,:]), dim=1))
-        hidden1 = torch.relu(hidden1)
         hidden1 = self.rnn1fc1(hidden1)
+        hidden1 = self.bn1(hidden1)
+        hidden1 = torch.relu(hidden1)
         
+
         # network 2
         output2, (hidden2, _) = self.rnn2(dropout2)
         hidden2 = self.dropout2(torch.cat((hidden2[-1,:,:], hidden2[-2,:,:]), dim=1))
+
+
         #print(hidden1.shape, hidden2.shape)
 
         #return tnn.sigmoid(self.fc1(hidden1)), tnn.softmax(self.fc2(hidden2))
@@ -305,7 +309,7 @@ lossFunc = loss()
 
 trainValSplit = 0.9
 batchSize = 64
-epochs = 20
+epochs = 10
 #optimiser = toptim.SGD(net.parameters(), lr=0.01)
 #optimiser = toptim.Adam(net.parameters(), lr=0.0005)
 optimiser = toptim.Adam(net.parameters(), lr=0.0001)
