@@ -7,22 +7,26 @@ From observing the dataset, we noticed that most sentences have long range depen
 
 Binary classification RNN:
 
-Word embedding - > 2 * LSTM -> Fully connected (512) -> Relu -> Fully connected (128) -> Sigmoid (1)
+Word embedding - > 2 * LSTM -> Fully connected1 (512) -> Relu -> Fully connected2 (128) -> Sigmoid (1)
 
 5-class classification RNN:
-Word embedding - > 2 * LSTM -> Fully connected (512) -> Relu -> Fully connected (512) -> Softmax (5)
+Word embedding - > 2 * LSTM -> Fully connected1 (512) -> Relu -> Fully connected2 (512) -> Fully connected3 (256) -> Softmax (5)
 
 
 Parameters:
 Batch size: 128
-Optimiser: Adam, learning rate: 0.0005
+Optimiser: Adam optimiser, learning rate: 0.0005
 
 Rating loss: Binary Cross Entropy
 Category loss: Cross Entropy
 Combined loss: rating loss + category
 
+For both networks, we use two-layers LSTM's to learn sentence representations. Then, we pass the network through two fully connected hidden layers and perform classification (binary for rating, 5-class for category). 
 
-We decided to use larger fully connected layers for the 5-class classification RNN because we thought using 
+We decided to use larger fully connected layers for the 5-class classification RNN to try to extract more features from the data since it is a multi-class classification. This worked better than the layers used in the binary classification RNN. 
+
+We decided to sum up the losses from the two RNN's and attempt to minimise that value through training. We also tried taking the log of the losses but the results were minimum.
+
 
 
 
