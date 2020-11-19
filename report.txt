@@ -1,5 +1,5 @@
-
-
-Two LSTM recurrent networks were chosened to train the model. 
+Two bi-directional LSTM recurrent networks were chosened to train the model. 
 The first RNN is a binary classification network for rating and the second RNN is a multi-class classification for review catagory.
 
+Reasons for selecting LSTM:
+From observing the dataset, we noticed that most sentences have long range dependency, which means 
