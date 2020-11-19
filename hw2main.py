@@ -10,6 +10,7 @@ DO NOT MODIFY THIS FILE
 import torch
 from torchtext import data
 import matplotlib.pyplot as plt
+import numpy as np
 from config import device
 import student
 
