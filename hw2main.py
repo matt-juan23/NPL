@@ -9,7 +9,7 @@ DO NOT MODIFY THIS FILE
 
 import torch
 from torchtext import data
-
+import matplotlib.pyplot as plt
 from config import device
 import student
 
@@ -144,6 +144,12 @@ def main():
                                               correctCategoryOnlyPercent,
                                               bothCorrectPercent, score))
 
-
+        # Plot learning curve (with costs)
+        #costs = np.squeeze(d['costs'])
+        plt.plot(loss_arr)
+        plt.ylabel('loss')
+        plt.xlabel('epochs')
+        plt.title("loss over time")
+        plt.show()
 if __name__ == '__main__':
     main()
