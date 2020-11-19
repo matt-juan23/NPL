@@ -185,7 +185,9 @@ class network(tnn.Module):
 #pretty cool
 
 ''' Justification
+LSTM
 
+Loss function
 
 '''
 
@@ -234,8 +236,7 @@ class network(tnn.Module):
 class convNet(cnn.Module):
     
     def __init__(self):
-        self.
-        super(convNet, self).__init__()
+        self.super(convNet, self).__init__()
 
         self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx = pad_idx)
         
@@ -291,7 +292,7 @@ lossFunc = loss()
 ################## The following determines training options ###################
 ################################################################################
 
-trainValSplit = 0.8
+trainValSplit = 0.85
 batchSize = 64
 epochs = 20
 #optimiser = toptim.SGD(net.parameters(), lr=0.01)
