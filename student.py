@@ -210,7 +210,7 @@ class network(tnn.Module):
                             bidirectional=True,
                             dropout=0.6)
 
-        self.rnn2fc1 = tnn.Linear(512*2, 512)
+        self.rnn2fc1 = tnn.Linear(256*2, 512)
         self.rnn2fc2 = tnn.Linear(512, 5)
         self.dropout2 = tnn.Dropout(0.6)
 
