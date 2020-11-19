@@ -103,7 +103,8 @@ class loss(tnn.Module):
         catLoss = tnn.CrossEntropyLoss()
         loss1 = ratingLoss(ratingOutput.squeeze(1), ratingTarget.float())
         loss2 = catLoss(categoryOutput, categoryTarget)
-        # print(loss1, loss2)
+        print("loss")
+        print(loss1, loss2)
         # return (loss1 + loss2) 
         # return (loss1 + loss2)/2
         return torch.log(loss1)/128 + torch.log(loss2)/128
@@ -308,7 +309,7 @@ lossFunc = loss()
 
 trainValSplit = 0.9
 batchSize = 128
-epochs = 10
+epochs = 1
 #optimiser = toptim.SGD(net.parameters(), lr=0.01)
 #optimiser = toptim.Adam(net.parameters(), lr=0.0005)
 optimiser = toptim.Adam(net.parameters(), lr=0.0002)
