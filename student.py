@@ -99,7 +99,6 @@ class loss(tnn.Module):
 
     def forward(self, ratingOutput, categoryOutput, ratingTarget, categoryTarget):
         #ratingOutput, categoryOutput, ratingTarget, categoryTarget = ratingOutput.float(), categoryOutput.float(), ratingTarget.float(), categoryTarget.float()
-
         ratingLoss = tnn.BCEWithLogitsLoss()
         catLoss = tnn.CrossEntropyLoss()
         loss1 = ratingLoss(ratingOutput.squeeze(1), ratingTarget.float())
@@ -107,7 +106,7 @@ class loss(tnn.Module):
         # print(loss1, loss2)
         # return (loss1 + loss2) 
         # return (loss1 + loss2)/2
-        return torch.log(loss1 + loss2)
+        return torch.log(loss1) + torch.log(loss2)
 
 '''
 # REVISION 1
@@ -206,8 +205,6 @@ class network(tnn.Module):
         self.dropout1 = tnn.Dropout(0.6)
 
 
-
-
         self.rnn2 = tnn.LSTM(300,
                             256,
                             num_layers=2,
@@ -232,8 +229,9 @@ class network(tnn.Module):
         # network 1
         output1, (hidden1, _) = self.rnn1(dropout1)
         hidden1 = self.dropout1(torch.cat((hidden1[-1,:,:], hidden1[-2,:,:]), dim=1))
+        hidden1 = torch.relu(hidden1)
         hidden1 = self.rnn1fc1(hidden1)
-
+        
         # network 2
         output2, (hidden2, _) = self.rnn2(dropout2)
         hidden2 = self.dropout2(torch.cat((hidden2[-1,:,:], hidden2[-2,:,:]), dim=1))
@@ -305,7 +303,7 @@ lossFunc = loss()
 ################## The following determines training options ###################
 ################################################################################
 
-trainValSplit = 0.85
+trainValSplit = 0.9
 batchSize = 64
 epochs = 20
 #optimiser = toptim.SGD(net.parameters(), lr=0.01)
@@ -317,8 +315,6 @@ optimiser = toptim.Adam(net.parameters(), lr=0.0001)
 # 40 epochs went about 0.5 better score
 
 # TrainSplit: 0.9,300d, 10 epoches, adam 0.001 lr --> 86.9
-
-
 
 # layers
 # Adam lr
