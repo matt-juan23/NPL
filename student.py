@@ -235,14 +235,15 @@ class network(tnn.Module):
         # network 2
         output2, (hidden2, _) = self.rnn2(dropout2)
         hidden2 = self.dropout2(torch.cat((hidden2[-1,:,:], hidden2[-2,:,:]), dim=1))
-        hidden2 = self.rnn2fc1(hidden2)
-        hidden2 = torch.relu(hidden2)
+
+        # hidden2 = self.rnn2fc1(hidden2)
+        # hidden2 = torch.relu(hidden2)
 
         #print(hidden1.shape, hidden2.shape)
 
         #return tnn.sigmoid(self.fc1(hidden1)), tnn.softmax(self.fc2(hidden2))
         #return self.fc1(torch.sigmoid(hidden1)), self.fc2(torch.sigmoid(hidden2))
-        return self.rnn1fc2(hidden1), self.rnn2fc2(hidden2)
+        return self.rnn1fc2(hidden1), self.rnn2fc1(hidden2)
         #return self.fc1(torch.cat((hidden1[-2,:,:], hidden1[-1,:,:]), dim=1)), self.fc2(torch.cat((hidden2[-2,:,:], hidden2[-1,:,:]), dim=1))
 
 
