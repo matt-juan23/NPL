@@ -211,7 +211,7 @@ class network(tnn.Module):
                             dropout=0.6)
 
         self.rnn2fc1 = tnn.Linear(256*2, 128)
-        self.rnn2fc2 = tnn.Linear(128, 1)
+        self.rnn2fc2 = tnn.Linear(128, 5)
         self.dropout2 = tnn.Dropout(0.6)
 
     def forward(self, input, length):
@@ -236,8 +236,8 @@ class network(tnn.Module):
         output2, (hidden2, _) = self.rnn2(dropout2)
         hidden2 = self.dropout2(torch.cat((hidden2[-1,:,:], hidden2[-2,:,:]), dim=1))
 
-        # hidden2 = self.rnn2fc1(hidden2)
-        # hidden2 = torch.relu(hidden2)
+        hidden2 = self.rnn2fc1(hidden2)
+        hidden2 = torch.relu(hidden2)
 
         #print(hidden1.shape, hidden2.shape)
 
