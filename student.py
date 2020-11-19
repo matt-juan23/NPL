@@ -195,7 +195,7 @@ class network(tnn.Module):
     def __init__(self):
         super(network, self).__init__()
         self.rnn1 = tnn.LSTM(300,
-                            256,
+                            512,
                             num_layers=2,
                             bidirectional=True,
                             dropout=0.6)
