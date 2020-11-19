@@ -211,7 +211,7 @@ class network(tnn.Module):
                             dropout=0.6)
 
         self.rnn2fc1 = tnn.Linear(512*2, 128)
-        self.rnn1fc2 = tnn.Linear(128, 1)
+        self.rnn2fc2 = tnn.Linear(128, 1)
         self.dropout2 = tnn.Dropout(0.6)
 
     def forward(self, input, length):
