@@ -146,7 +146,7 @@ def main():
 
         # Plot learning curve (with costs)
         #costs = np.squeeze(d['costs'])
-        plt.plot(loss_arr)
+        plt.plot(np.squeeze(loss_arr))
         plt.ylabel('loss')
         plt.xlabel('epochs')
         plt.title("loss over time")
