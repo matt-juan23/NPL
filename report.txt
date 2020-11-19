@@ -1,5 +1,28 @@
-Two bi-directional LSTM recurrent networks were chosened to train the model. 
-The first RNN is a binary classification network for rating and the second RNN is a multi-class classification for review catagory.
+Two bi-directional LSTM recurrent networks were chosen to train the model. 
+The first RNN is a binary classification network for rating and the second RNN is a multi-class classification for review categories.
 
 Reasons for selecting LSTM:
-From observing the dataset, we noticed that most sentences have long range dependency, which means 
+From observing the dataset, we noticed that most sentences have long range dependencies, which means a bi-directional LSTM would be a good fit for these dependencies. 
+
+
+Binary classification RNN:
+
+Word embedding - > 2 * LSTM -> Fully connected (512) -> Relu -> Fully connected (128) -> Sigmoid (1)
+
+5-class classification RNN:
+Word embedding - > 2 * LSTM -> Fully connected (512) -> Relu -> Fully connected (512) -> Softmax (5)
+
+
+Parameters:
+Batch size: 128
+Optimiser: Adam, learning rate: 0.0005
+
+Rating loss: Binary Cross Entropy
+Category loss: Cross Entropy
+Combined loss: rating loss + category
+
+
+We decided to use larger fully connected layers for the 5-class classification RNN because we thought using 
+
+
+
