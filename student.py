@@ -205,7 +205,7 @@ class network(tnn.Module):
 
 
         self.rnn2 = tnn.LSTM(300,
-                            512,
+                            256,
                             num_layers=2,
                             bidirectional=True,
                             dropout=0.6)
