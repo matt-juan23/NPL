@@ -200,7 +200,7 @@ class network(tnn.Module):
                             dropout=0.6)
 
         self.rnn1fc1 = tnn.Linear(256*2, 128)
-        self.bn1 = nn.BatchNorm1d(num_features=128)
+        self.bn1 = tnn.BatchNorm1d(num_features=128)
         self.rnn1fc2 = tnn.Linear(128, 1)
         self.dropout1 = tnn.Dropout(0.6)
 
